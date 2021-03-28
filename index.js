@@ -3,6 +3,7 @@ const client = new Discord.Client()
 
 const fs = require('fs')
 require('dotenv').config()
+const mongoose = require('mongoose')
 
 client.commands = new Discord.Collection()
 client.events   = new Discord.Collection()
@@ -13,27 +14,15 @@ handlers.forEach(handler => {
     require(`./handlers/${handler}`)(client, Discord)
 })
 
-// const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'))
-// for (const file of commandFiles) {
-//     const command = require(`./commands/${file}`)
-
-//     client.commands.set(command.name, command)
-// }
-
-// client.once('ready', () => {
-//     console.log('KneiterBot ONLINE!!')
-// })
-
-// client.on('message', message => {
-//     if (!message.content.startsWith(prefix) || message.author.bot) return
-
-//     const args = message.content.slice(prefix.length).split(/ +/)
-//     const command = args.shift().toLowerCase();
-
-//     if (command === 'ping') {
-//         client.commands.get('ping').execute(message, args)
-//     }
-// })
+mongoose.connect(process.env.SRV, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+}).then(() => {
+    console.log("Connected to DB")
+}).catch((err) => {
+    console.error(err)
+}) 
 
 client.login(process.env.TOKEN)
 

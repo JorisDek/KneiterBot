@@ -1,6 +1,6 @@
 module.exports = {
     name: 'ban',
-    alisases: [],
+    permissions: ["BAN_MEMBERS"],
     cooldown: 5,
     description: "Ban a user",
     execute(client, message, args) {

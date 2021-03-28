@@ -1,6 +1,7 @@
 module.exports = {
     name: 'clear',
     alisases: [],
+    permissions: ["MANAGE_MESSAGES"],
     cooldown: 10,
     description: "Clear messages!",
     async execute(client, message, args) {
