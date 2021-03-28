@@ -1,6 +1,7 @@
 module.exports = {
     name: 'clear',
     alisases: [],
+    cooldown: 10,
     description: "Clear messages!",
     async execute(client, message, args) {
         if(!args[0] ) return message.reply("Plaease enter the amount of messages you want to clear.")
