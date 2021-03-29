@@ -1,13 +1,33 @@
 const cooldowns = new Map()
+const profileModel = require('../../models/profileSchema')
 
-module.exports = (Discord, client, message) => {
+
+module.exports = async(Discord, client, message) => {
     const prefix = '!'
 
     if (!message.content.startsWith(prefix) || message.author.bot) return
 
+    let profileData;
+    try {
+        profileData = await profileModel.findOne({ userID: message.author.id})
+        if(!profileData) {
+            let profile = await profileModel.create({
+                userID: message.author.id,
+                serverID: message.guild.id,
+                coins: 1000,
+                bank: 0
+            })
+        
+            profile.save()
+        }
+        
+    } catch(err) {
+        console.error(err)
+    }
+
     const args = message.content.slice(prefix.length).split(/ +/)
     const cmd = args.shift().toLowerCase()
-    const command = client.commands.get(cmd) || client.commands.find(a => a.alisases.includes(cmd))
+    const command = client.commands.get(cmd) || client.commands.find(a => a.aliases.includes(cmd))
 
     const validPermissions = [
         "CREATE_INSTANT_INVITE",
@@ -81,8 +101,9 @@ module.exports = (Discord, client, message) => {
         time_stamps.set(message.author.id, current_time)
         setTimeout(() => time_stamps.delete(message.author.id), cooldown_amount)
     }
+
     try {
-        command.execute(client, message, args, Discord)
+        command.execute(client, message, args, Discord, profileData)
     } catch(err) {
         message.reply("There was an error trying to execute this command!")
         console.log(err)

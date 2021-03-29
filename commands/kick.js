@@ -1,6 +1,6 @@
 module.exports = {
     name: 'kick',
-    alisases: [],
+    aliases: [],
     permissions: ["KICK_MEMBERS"],
     cooldown: 10,
     description: "Kick a user",

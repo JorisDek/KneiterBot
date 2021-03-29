@@ -1,6 +1,6 @@
 module.exports = {
     name: 'niels',
-    alisases: [],
+    aliases: [],
     permissions: ["SEND_MESSAGES"],
     cooldown: 2,
     description: 'What does the bot say when you say "Niels"',

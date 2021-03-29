@@ -1,6 +1,6 @@
 module.exports = {
     name: 'clear',
-    alisases: [],
+    aliases: [],
     permissions: ["MANAGE_MESSAGES"],
     cooldown: 10,
     description: "Clear messages!",
