@@ -3,7 +3,7 @@ const profileModel = require('../models/profileSchema')
 module.exports = {
     name: 'give',
     aliases: ['gv'],
-    permissions: [],
+    permissions: ["ADMINISTRATOR"],
     cooldown: 0,
     description: "Deposit coins into your bank",
     async execute(client, message, args, Discord, userData) {
@@ -18,6 +18,18 @@ module.exports = {
             const targetData = await profileModel.findOne({
                 userID: message.author.id
             })
+            if (!targetData) return message.channel.senf(`This user doesn't exist in DB.`)
+
+            await profileModel.findOneAndUpdate({
+                userID: targetUser.id
+            }, {
+                $inc: {
+                    coins: amount
+                }
+            })
+
+            return message.channel.send(`This user has been given ${amount} coins!`)
+
         } catch(err) {
             console.log(err)
         }
