@@ -1,4 +1,7 @@
+const { float } = require('getenv')
 const mongoose = require('mongoose')
+var Float = require('mongoose-float').loadType(mongoose);
+
 
 const profileSchema = new mongoose.Schema({
     userID: {
@@ -16,7 +19,16 @@ const profileSchema = new mongoose.Schema({
     },
     bank: {
         type: Number
+    },
+    pp: {
+        type: Float,
+        default: 1.00
+    },
+    ggs: {
+        type: Float,
+        default: 100
     }
+
 })
 
 const model = mongoose.model('ProfileModels', profileSchema)

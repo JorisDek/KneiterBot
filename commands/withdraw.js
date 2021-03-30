@@ -5,12 +5,12 @@ module.exports = {
     aliases: ["wd"],
     permissions: [],
     cooldown: 0,
-    description: "Withdraw coins from your bank",
+    description: "Withdraw GG from your bank",
     async execute(client, message, args, Discord, userData) {
         const amount = args[0]
         if(amount % 1 != 0 || amount <= 0) return message.channel.send('Withdraw must be a whole number above 0')
         try {
-            if (amount > userData.bank) return message.channel.send("You don't have that much coins in your bank")
+            if (amount > userData.bank) return message.channel.send("You don't have that much GG in your bank")
 
             await profileModel.findOneAndUpdate({
                 userID: message.author.id
@@ -21,7 +21,7 @@ module.exports = {
                 }
             })
 
-            return message.channel.send(`You withdrawn ${amount} coins from you bank.`)
+            return message.channel.send(`You withdrawn ${amount} GG from you bank.`)
 
         } catch(err) {
             console.error(err)

@@ -6,11 +6,14 @@ module.exports = {
     description: "Check the user balance",
     execute(client, message, args, Discord, userData) {
         const newEmbed = new Discord.MessageEmbed()
-        .setColor('##2096F3')
-        .setTitle(`Balance ${userData.id}`)
-        .setDescription(`Your wallet balance is ${userData.coins}. Your bank balance is ${userData.bank}.`)
+        .setColor('#2096F3')
+        .setTitle(`Balance ${message.author.username}`)
+        .addFields(
+            {name: 'Cash:', value: userData.coins},
+            {name: 'Bank:', value: userData.bank}
+        )
 
 
-        message.channel.send(`Your wallet balance is ${userData.coins}. Your bank balance is ${userData.bank}.`)
+        message.channel.send(newEmbed)
     }
 }

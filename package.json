@@ -13,6 +13,7 @@
     "dotenv": "^8.2.0",
     "fs": "0.0.1-security",
     "getenv": "^1.0.0",
-    "mongoose": "^5.12.2"
+    "mongoose": "^5.12.2",
+    "mongoose-float": "^1.0.4"
   }
 }

@@ -12,13 +12,13 @@ module.exports = {
 
         const targetUser = message.mentions.users.first()
         if(!targetUser) return message.channel.send("That user doesn't exist")
-        if(amount % 1 != 0 || amount <= 0) return message.channel.send('Deposit must be a whole number above 0')
+        if(amount % 1 != 0 || amount <= 0) return message.channel.send('Number must be a whole number above 0')
 
         try {
             const targetData = await profileModel.findOne({
                 userID: message.author.id
             })
-            if (!targetData) return message.channel.senf(`This user doesn't exist in DB.`)
+            if (!targetData) return message.channel.send(`This user doesn't exist in DB.`)
 
             await profileModel.findOneAndUpdate({
                 userID: targetUser.id
